@@ -1,6 +1,11 @@
-![App Brewery Banner](https://github.com/londonappbrewery/Images/blob/master/AppBreweryBanner.png)
 
-# Mi Card
+![Screenshot1](screenshots/mi-card-screen-land.png)
+
+![Screenshot1](screenshots/mi-card-screen-port.png)
+
+![Screenshot3](screenshots/mi-card-screen-in-hand.png)
+
+# Mi Card app
 
 ## Our Goal
 
