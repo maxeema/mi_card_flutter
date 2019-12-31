@@ -1,4 +1,4 @@
-package co.appbrewery.micard;
+package maxeem.america.micard;
 
 import android.os.Bundle;
 import io.flutter.app.FlutterActivity;
