@@ -7,198 +7,193 @@ import 'package:mi_card/utils.dart';
 import 'extensions.dart';
 import 'resources.dart' as r;
 
-void main() {
-  runApp(
-    MaterialApp(
-      home: MyApp(),
-      themeMode: ThemeMode.dark,
-      darkTheme: ThemeData.dark(),
-      debugShowCheckedModeBanner: false,
-    ),
-  );
-}
+void main() => runApp(
+  MaterialApp(
+    home: MyApp(),
+    themeMode: ThemeMode.dark,
+    darkTheme: ThemeData.dark(),
+    debugShowCheckedModeBanner: false,
+  ),
+);
 
 class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) =>
-    context.isLandscape ? buildLandscape(context) : buildPortrait(context);
-
-  Widget buildLandscape(BuildContext context) {
-    return Scaffold(
-      body: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: <Widget>[
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              buildAvatar(50),
-              SizedBox(height: 10,),
-              Text(
-                r.string.author,
-                textScaleFactor: 1.3,
-                style: GoogleFonts.juliusSansOne(),
-              )
-            ],
-          ),
-          Column(
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              SizedBox(
-                width: 1,
-                child: Text(
-                  r.char.love.repeat(5, separator: r.char.space),
-                  textScaleFactor: .75,
-                )
-              ),
-            ],
-          ),
-          Column(
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              RichText(
-                text: TextSpan(
-                    style: TextStyle(
-                      letterSpacing: 2
-                    ),
-                    children: spanzize(
-                      r.conf.phone, r.conf.phone_code,
-                      (nonMatched) => TextSpan(text: nonMatched),
-                      (matched) => TextSpan(
-                        text: matched,
-                        style: TextStyle(color: Colors.lightBlueAccent),
-//                        recognizer: TapGestureRecognizer()..onTap = () => call(r.conf.phone)
-                      )
-                    )
-                ),
-              ),
-              SizedBox(height: 10,),
-              RichText(
-                textScaleFactor: 1.1,
-                text: TextSpan(
-                  style: TextStyle(
-                    letterSpacing: 1.5
-                  ),
-                  children: <TextSpan>[
-                    ... spanzize(
-                      r.conf.email, r.conf.email_nick,
-                      (nonMatched) => TextSpan(text: nonMatched),
-                      (matched) => TextSpan(
-                        text: matched,
-                        style: TextStyle(color: Theme.of(context).accentColor),
-//                        recognizer: TapGestureRecognizer()..onTap = () => email(r.string.email)
-                      )
-                    )
-                  ],
-                ),
-              ),
-              SizedBox(height: 10,),
-              RichText(
-                textScaleFactor: 1.5,
-                text: TextSpan(
-                  style: GoogleFonts.caveat(),
-                  children: [
-                    TextSpan(text: r.string.flutter,
-                      style: TextStyle(color: Colors.lightBlueAccent)
-                    ),
-                    TextSpan(text: r.char.space),
-                    TextSpan(text: r.string.developer),
-                  ],
-                ),
-              ),
-            ],
-          ),
-        ],
-      ),
+    Scaffold(
+      body: SafeArea(
+        child: context.isLandscape ? buildLandscape(context) : buildPortrait(context))
     );
-  }
 
-  Widget buildPortrait(BuildContext context) {
-    return Scaffold(
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              buildAvatar(60),
-              SizedBox.fromSize(size: Size.fromHeight(20)),
-              Text(
-                r.string.author,
-                textScaleFactor: 1.5,
-                style: GoogleFonts.juliusSansOne(),
-              ),
-              SizedBox.fromSize(size: Size.fromHeight(15)),
-              Text(
-                r.char.love.repeat(5),
-                textScaleFactor: .85,
-                style: TextStyle(
-                  letterSpacing: 7,
-                ),
-              ),
-            ]
-          ),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              RichText(
-                textScaleFactor: 1.2,
-                text: TextSpan(
+  Widget buildLandscape(BuildContext context) =>
+    Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: <Widget>[
+        Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            buildAvatar(50),
+            SizedBox(height: 10,),
+            Text(
+              r.string.author,
+              textScaleFactor: 1.3,
+              style: GoogleFonts.juliusSansOne(),
+            )
+          ],
+        ),
+        Column(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            SizedBox(
+              width: 1,
+              child: Text(
+                r.char.love.repeat(5, separator: r.char.space),
+                textScaleFactor: .75,
+              )
+            ),
+          ],
+        ),
+        Column(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            RichText(
+              text: TextSpan(
                   style: TextStyle(
                     letterSpacing: 2
                   ),
                   children: spanzize(
-                    r.conf.phone, "925",
+                    r.conf.phone, r.conf.phone_code,
                     (nonMatched) => TextSpan(text: nonMatched),
                     (matched) => TextSpan(
                       text: matched,
                       style: TextStyle(color: Colors.lightBlueAccent),
-//                          recognizer: TapGestureRecognizer()..onTap = () => call(r.conf.phone)
+//                        recognizer: TapGestureRecognizer()..onTap = () => call(r.conf.phone)
                     )
                   )
-                ),
               ),
-              Divider(height: 20,),
-              RichText(
-                textScaleFactor: 1.1,
-                text: TextSpan(
-                  style: TextStyle(
-                    letterSpacing: 1.5
-                  ),
-                  children: <TextSpan>[
-                    ... spanzize(
-                      r.conf.email, "america",
-                      (nonMatched) => TextSpan(text: nonMatched),
-                      (matched) => TextSpan(
-                        text: matched,
-                        style: TextStyle(color: Theme.of(context).accentColor),
-//                        recognizer: TapGestureRecognizer()..onTap = () => email(r.conf.email)
-                      )
+            ),
+            SizedBox(height: 10,),
+            RichText(
+              textScaleFactor: 1.1,
+              text: TextSpan(
+                style: TextStyle(
+                  letterSpacing: 1.5
+                ),
+                children: <TextSpan>[
+                  ... spanzize(
+                    r.conf.email, r.conf.email_nick,
+                    (nonMatched) => TextSpan(text: nonMatched),
+                    (matched) => TextSpan(
+                      text: matched,
+                      style: TextStyle(color: Theme.of(context).accentColor),
+//                        recognizer: TapGestureRecognizer()..onTap = () => email(r.string.email)
                     )
-                  ],
-                ),
+                  )
+                ],
               ),
-              Divider(height: 20,),
-              RichText(
-                textScaleFactor: 1.7,
-                text: TextSpan(
-                  style: GoogleFonts.caveat(),
-                  children: <TextSpan>[
-                    TextSpan(text: r.string.flutter,
-                      style: TextStyle(color: Colors.lightBlueAccent)
-                    ),
-                    TextSpan(text: r.char.space),
-                    TextSpan(text: r.string.developer),
-                  ],
-                ),
+            ),
+            SizedBox(height: 10,),
+            RichText(
+              textScaleFactor: 1.5,
+              text: TextSpan(
+                style: GoogleFonts.caveat(),
+                children: [
+                  TextSpan(text: r.string.flutter,
+                    style: TextStyle(color: Colors.lightBlueAccent)
+                  ),
+                  TextSpan(text: r.char.space),
+                  TextSpan(text: r.string.developer),
+                ],
               ),
-            ],
-          )
-        ]
-      ),
+            ),
+          ],
+        ),
+      ],
     );
-  }
+
+  Widget buildPortrait(BuildContext context) =>
+    Column(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: [
+        Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            buildAvatar(60),
+            SizedBox.fromSize(size: Size.fromHeight(20)),
+            Text(
+              r.string.author,
+              textScaleFactor: 1.5,
+              style: GoogleFonts.juliusSansOne(),
+            ),
+            SizedBox.fromSize(size: Size.fromHeight(15)),
+            Text(
+              r.char.love.repeat(5),
+              textScaleFactor: .85,
+              style: TextStyle(
+                letterSpacing: 7,
+              ),
+            ),
+          ]
+        ),
+        Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            RichText(
+              textScaleFactor: 1.2,
+              text: TextSpan(
+                style: TextStyle(
+                  letterSpacing: 2
+                ),
+                children: spanzize(
+                  r.conf.phone, "925",
+                  (nonMatched) => TextSpan(text: nonMatched),
+                  (matched) => TextSpan(
+                    text: matched,
+                    style: TextStyle(color: Colors.lightBlueAccent),
+//                          recognizer: TapGestureRecognizer()..onTap = () => call(r.conf.phone)
+                  )
+                )
+              ),
+            ),
+            Divider(height: 20,),
+            RichText(
+              textScaleFactor: 1.1,
+              text: TextSpan(
+                style: TextStyle(
+                  letterSpacing: 1.5
+                ),
+                children: <TextSpan>[
+                  ... spanzize(
+                    r.conf.email, "america",
+                    (nonMatched) => TextSpan(text: nonMatched),
+                    (matched) => TextSpan(
+                      text: matched,
+                      style: TextStyle(color: Theme.of(context).accentColor),
+//                        recognizer: TapGestureRecognizer()..onTap = () => email(r.conf.email)
+                    )
+                  )
+                ],
+              ),
+            ),
+            Divider(height: 20,),
+            RichText(
+              textScaleFactor: 1.7,
+              text: TextSpan(
+                style: GoogleFonts.caveat(),
+                children: <TextSpan>[
+                  TextSpan(text: r.string.flutter,
+                    style: TextStyle(color: Colors.lightBlueAccent)
+                  ),
+                  TextSpan(text: r.char.space),
+                  TextSpan(text: r.string.developer),
+                ],
+              ),
+            ),
+          ],
+        )
+      ]
+    );
 
   Widget buildAvatar(double size) => MyFlutterAvatar(size: size);
 
